@@ -1,4 +1,4 @@
-package com.example.dailyqwiz.presentation.general
+package com.example.dailyqwiz.presentation.mainscreen.general
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
