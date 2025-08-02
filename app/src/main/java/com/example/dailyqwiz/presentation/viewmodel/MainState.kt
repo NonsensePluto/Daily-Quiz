@@ -1,8 +1,8 @@
-package com.example.dailyqwiz.presentation.mainscreen.viewmodel
+package com.example.dailyqwiz.presentation.viewmodel
 
 import com.example.dailyqwiz.domain.model.QuizQuestionModel
 
-data class MainScreenState(
+data class MainState(
     val questions: List<QuizQuestionModel> = emptyList(),
     val userAnswers: List<UserAnswer> = emptyList(),
     val points: Int = 0,

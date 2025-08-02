@@ -26,15 +26,16 @@ import com.example.dailyqwiz.presentation.mainscreen.quiz.QuizCard
 import com.example.dailyqwiz.presentation.mainscreen.utils.ErrorCard
 import com.example.dailyqwiz.presentation.mainscreen.utils.HistoryButton
 import com.example.dailyqwiz.presentation.mainscreen.utils.WelcomeCard
-import com.example.dailyqwiz.presentation.mainscreen.viewmodel.MainScreenViewModel
+import com.example.dailyqwiz.presentation.viewmodel.MainViewModel
 
 
 @Composable
 fun MainScreen (
-    mainScreenViewModel: MainScreenViewModel = hiltViewModel()
+    mainViewModel: MainViewModel = hiltViewModel(),
+    onNavigateToResults: () -> Unit,
 ) {
 
-    val state by mainScreenViewModel.uiState.collectAsStateWithLifecycle()
+    val state by mainViewModel.uiState.collectAsStateWithLifecycle()
     var selectedAnswer by remember { mutableStateOf<String?>(null) }
     var isQuizStarted = state.questions.isNotEmpty()
 
@@ -73,11 +74,14 @@ fun MainScreen (
                     onSelectAnswer = { selectedAnswer = it },
                     onNextQuestion = {
                         if (selectedAnswer != null) {
-                            mainScreenViewModel.onNextQuestion(selectedAnswer!!)
+                            mainViewModel.onNextQuestion(selectedAnswer!!)
                             selectedAnswer = null
                         }
                     },
-                    onEndQuiz = { }
+                    onEndQuiz = {
+                        mainViewModel.onNextQuestion(selectedAnswer!!)
+                        onNavigateToResults()
+                    }
                 )
             } else {
 
@@ -95,7 +99,7 @@ fun MainScreen (
                             modifier = Modifier
                                 .padding(top = 24.dp),
                             onStartQuizClick = {
-                                mainScreenViewModel.getQuizQuestions()
+                                mainViewModel.getQuizQuestions()
                                 isQuizStarted = true
                             }
                         )
@@ -109,5 +113,7 @@ fun MainScreen (
 @Preview(showBackground = true)
 @Composable
 fun MainScreenPreview() {
-    MainScreen()
+    MainScreen(
+        onNavigateToResults = {},
+    )
 }

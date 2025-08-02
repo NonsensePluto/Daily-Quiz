@@ -1,4 +1,4 @@
-package com.example.dailyqwiz.presentation.resultscreen
+package com.example.dailyqwiz.presentation.resultscreen.utils
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,7 +18,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.dailyqwiz.presentation.resultscreen.utils.StarsRow
 import com.example.dailyqwiz.ui.theme.BlueBackground
 import com.example.dailyqwiz.ui.theme.FullBlack
 import com.example.dailyqwiz.ui.theme.FullWhite
@@ -29,6 +28,7 @@ fun ResultCard(
     modifier: Modifier = Modifier,
     result: Int,
     maxResult: Int,
+    onNavigateToHomeScreen: () -> Unit
 ) {
     Card(
         modifier = modifier
@@ -78,29 +78,18 @@ fun ResultCard(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 16.dp),
-                text = "Ваш результат:$result из $maxResult",
+                text = "Ваш результат: $result из $maxResult",
                 color = FullBlack,
                 textAlign = TextAlign.Center,
                 fontSize = 18.sp
             )
 
-            Button(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 50.dp)
-                    .height(50.dp),
-                onClick = {  },
-                shape = RoundedCornerShape(16.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = BlueBackground, contentColor = FullWhite)
-            ) {
-                Text(
-                    text = "Начать заново",
-                    fontSize = 24.sp,
-                    fontWeight = FontWeight.Bold
-                )
-            }
-
-
+            ResultConfirmButton(
+                bodyColor = BlueBackground,
+                textColor = FullWhite,
+                onButtonClick = onNavigateToHomeScreen,
+                text = "Начать заново"
+            )
 
         }
     }
@@ -109,5 +98,5 @@ fun ResultCard(
 @Preview(showBackground = true)
 @Composable
 fun ResultCardPreview() {
-    ResultCard(result = 0, maxResult = 5)
+    ResultCard(result = 0, maxResult = 5, onNavigateToHomeScreen = {})
 }

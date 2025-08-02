@@ -1,13 +1,13 @@
 package com.example.dailyqwiz.domain.repository
 
 import com.example.dailyqwiz.data.remote.QuizRemoteDataSource
-import com.example.dailyqwiz.domain.mapper.QuizQuestionResponseToModel
+import com.example.dailyqwiz.domain.mapper.QuizQuestionResponseToDomain
 import com.example.dailyqwiz.domain.model.QuizQuestionModel
 import javax.inject.Inject
 
-class QuizRepository @Inject constructor(
+class QuizRemoteRepository @Inject constructor(
     private val quizRemoteDataSource: QuizRemoteDataSource,
-    private val responseToModelMapper: QuizQuestionResponseToModel
+    private val responseToModelMapper: QuizQuestionResponseToDomain
     ) {
 
     suspend fun getQuizQuestions(

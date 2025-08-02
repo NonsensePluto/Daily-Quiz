@@ -1,9 +1,9 @@
-package com.example.dailyqwiz.presentation.mainscreen.viewmodel
+package com.example.dailyqwiz.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.dailyqwiz.domain.model.QuizQuestionModel
-import com.example.dailyqwiz.domain.usecases.GetQuizQuestionsUseCase
+import com.example.dailyqwiz.domain.usecases.remote.GetQuizQuestionsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -13,11 +13,11 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainScreenViewModel @Inject constructor(
+class MainViewModel @Inject constructor(
     private val getQuizQuestionsUseCase: GetQuizQuestionsUseCase
 ) : ViewModel(){
-    private val _uiState = MutableStateFlow(MainScreenState())
-    val uiState: StateFlow<MainScreenState> = _uiState.asStateFlow()
+    private val _uiState = MutableStateFlow(MainState())
+    val uiState: StateFlow<MainState> = _uiState.asStateFlow()
 
     fun getQuizQuestions(){
         _uiState.update { state ->
@@ -59,8 +59,17 @@ class MainScreenViewModel @Inject constructor(
         _uiState.update { state ->
             state.copy(
                 points = if (state.questions.first().correctAnswer == answer) state.points + 1 else state.points,
-                userAnswers = state.userAnswers + UserAnswer(state.questions.first(), answer)
+                userAnswers = state.userAnswers + UserAnswer(
+                    questionText = state.questions.first().question,
+                    allOptions = state.currentShuffledAnswers,
+                    selected = answer,
+                    correctAnswer = state.questions.first().correctAnswer
+                )
             )
         }
+    }
+
+    fun resetQuiz() {
+        _uiState.value = MainState()
     }
 }

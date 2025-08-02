@@ -1,4 +1,4 @@
-package com.example.dailyqwiz.presentation.resultscreen
+package com.example.dailyqwiz.presentation.resultscreen.utils
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -18,7 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.dailyqwiz.ui.theme.DeepPurple
 import com.example.dailyqwiz.ui.theme.FullBlack
 import com.example.dailyqwiz.ui.theme.DirtyWhite
 import com.example.dailyqwiz.ui.theme.FullWhite
