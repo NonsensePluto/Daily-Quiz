@@ -1,6 +1,5 @@
-package com.example.dailyqwiz.presentation.mainscreen.quiz
+package com.example.dailyqwiz.presentation.resultscreen
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -12,31 +11,25 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.dailyqwiz.presentation.resultscreen.utils.StarsRow
 import com.example.dailyqwiz.ui.theme.BlueBackground
 import com.example.dailyqwiz.ui.theme.FullBlack
 import com.example.dailyqwiz.ui.theme.FullWhite
-import com.example.dailyqwiz.ui.theme.LightPurple
+import com.example.dailyqwiz.ui.theme.StarYellow
 
 @Composable
-fun QuizCard(
+fun ResultCard(
     modifier: Modifier = Modifier,
-    questionNumber: Int,
-    totalQuestions: Int,
-    question: String,
-    shuffledAnswers: List<String>,
-    selectedAnswer: String? = null,
-    onSelectAnswer: (String) -> Unit,
-    onNextQuestion: () -> Unit = {},
-    onEndQuiz: () -> Unit = {}
+    result: Int,
+    maxResult: Int,
 ) {
-    val isLastQuestion = questionNumber == totalQuestions
-
     Card(
         modifier = modifier
             .fillMaxWidth()
@@ -45,69 +38,76 @@ fun QuizCard(
         colors = CardDefaults.cardColors(containerColor = FullWhite),
     ) {
         Column(
-            modifier = Modifier.padding(16.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(
-                modifier = Modifier.fillMaxWidth(),
-                text = "Вопрос $questionNumber из $totalQuestions",
-                color = LightPurple,
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center,
+
+            StarsRow(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .align(Alignment.CenterHorizontally),
+                result = result,
+                maxResult = maxResult
             )
+
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 20.dp, bottom = 20.dp),
-                color = FullBlack,
-                text = question,
+                    .padding(16.dp),
+                text = "$result из $maxResult",
+                color = StarYellow,
                 textAlign = TextAlign.Center,
                 fontWeight = FontWeight.Bold,
                 fontSize = 18.sp
             )
-            shuffledAnswers.forEach { answer ->
-                AnswerOption(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 16.dp),
-                    answer = answer,
-                    isSelected = selectedAnswer == answer,
-                    onClick = { onSelectAnswer(answer) }
-                )
-            }
+
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 32.dp),
+                text = "Хорошая работа!",
+                color = FullBlack,
+                textAlign = TextAlign.Center,
+                fontWeight = FontWeight.Bold,
+                fontSize = 24.sp
+            )
+
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp),
+                text = "Ваш результат:$result из $maxResult",
+                color = FullBlack,
+                textAlign = TextAlign.Center,
+                fontSize = 18.sp
+            )
 
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 50.dp)
                     .height(50.dp),
-                onClick = if (isLastQuestion) onEndQuiz else onNextQuestion,
-                enabled = selectedAnswer != null,
+                onClick = {  },
                 shape = RoundedCornerShape(16.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = BlueBackground, contentColor = FullWhite)
             ) {
                 Text(
-                    text = if (isLastQuestion) "завершить" else "далее",
+                    text = "Начать заново",
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Bold
                 )
             }
 
-        }
 
+
+        }
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
-fun QuizCardPreview() {
-    QuizCard(
-        totalQuestions = 10,
-        questionNumber = 1,
-        question = "What is the capital of France?",
-        shuffledAnswers = listOf("Paris", "London", "Berlin", "Madrid"),
-        selectedAnswer = null,
-        onSelectAnswer = { },
-        onNextQuestion = { }
-    )
+fun ResultCardPreview() {
+    ResultCard(result = 0, maxResult = 5)
 }

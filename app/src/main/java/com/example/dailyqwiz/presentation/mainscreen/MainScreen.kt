@@ -8,6 +8,8 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.dailyqwiz.ui.theme.BlueBackground
@@ -19,8 +21,12 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.runtime.remember
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.dailyqwiz.presentation.mainscreen.general.TitleText
+import com.example.dailyqwiz.presentation.mainscreen.utils.TitleText
 import com.example.dailyqwiz.presentation.mainscreen.quiz.QuizCard
+import com.example.dailyqwiz.presentation.mainscreen.utils.ErrorCard
+import com.example.dailyqwiz.presentation.mainscreen.utils.HistoryButton
+import com.example.dailyqwiz.presentation.mainscreen.utils.WelcomeCard
+import com.example.dailyqwiz.presentation.mainscreen.viewmodel.MainScreenViewModel
 
 
 @Composable
@@ -29,6 +35,7 @@ fun MainScreen (
 ) {
 
     val state by mainScreenViewModel.uiState.collectAsStateWithLifecycle()
+    var selectedAnswer by remember { mutableStateOf<String?>(null) }
     var isQuizStarted = state.questions.isNotEmpty()
 
     Scaffold {
@@ -57,12 +64,20 @@ fun MainScreen (
 
             if (isQuizStarted) {
                 val currentQuestion = state.questions.first()
-                val allAnswers = remember(currentQuestion) {
-                    (currentQuestion.incorrectAnswers + currentQuestion.correctAnswer).shuffled()
-                }
                 QuizCard(
-                    totalQuestions = state.questions.size,
+                    totalQuestions = state.questions.size + state.userAnswers.size,
+                    questionNumber = state.userAnswers.size + 1,
                     question = currentQuestion.question,
+                    shuffledAnswers = state.currentShuffledAnswers,
+                    selectedAnswer = selectedAnswer,
+                    onSelectAnswer = { selectedAnswer = it },
+                    onNextQuestion = {
+                        if (selectedAnswer != null) {
+                            mainScreenViewModel.onNextQuestion(selectedAnswer!!)
+                            selectedAnswer = null
+                        }
+                    },
+                    onEndQuiz = { }
                 )
             } else {
 
@@ -70,6 +85,7 @@ fun MainScreen (
                     state.error != null -> {
                         ErrorCard(state.error!!)
                     }
+
                     state.isLoading -> {
                         CircularProgressIndicator()
                     }

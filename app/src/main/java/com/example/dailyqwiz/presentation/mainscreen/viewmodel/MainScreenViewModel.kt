@@ -1,7 +1,8 @@
-package com.example.dailyqwiz.presentation.mainscreen
+package com.example.dailyqwiz.presentation.mainscreen.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.dailyqwiz.domain.model.QuizQuestionModel
 import com.example.dailyqwiz.domain.usecases.GetQuizQuestionsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -25,29 +26,33 @@ class MainScreenViewModel @Inject constructor(
 
         viewModelScope.launch {
             val result = getQuizQuestionsUseCase()
+            val firstShuffle = getShuffledAnswer(result.firstOrNull())
             _uiState.update { state ->
                 state.copy(
                     isLoading = false,
-                    questions = result
+                    questions = result,
+                    currentShuffledAnswers = firstShuffle
                 )
             }
         }
     }
 
-    fun onNextQuestion(selectedAnswer: String) {//поменять все
+    fun onNextQuestion(selectedAnswer: String) {
+        checkAnswer(selectedAnswer)
         _uiState.update { state ->
-            val current = state.questions.firstOrNull()
-            val isCorrect = current?.correctAnswer == selectedAnswer
-            val updatedPoints = if (isCorrect) state.points + 1 else state.points
-            val updatedUserAnswers = if (current != null)
-                state.userAnswers + UserAnswer(current, selectedAnswer)
-            else state.userAnswers
+            val nextQuestions = state.questions.drop(1)
+            val nextShuffle = getShuffledAnswer(nextQuestions.firstOrNull())
             state.copy(
-                questions = state.questions.drop(1),
-                userAnswers = updatedUserAnswers,
-                points = updatedPoints
+                questions = nextQuestions,
+                currentShuffledAnswers = nextShuffle
             )
         }
+    }
+
+    private fun getShuffledAnswer(question: QuizQuestionModel?): List<String> {
+        return question?.let {
+            (it.incorrectAnswers + it.correctAnswer).shuffled()
+        } ?: emptyList()
     }
     
     private fun checkAnswer(answer: String) {

@@ -23,28 +23,31 @@ import androidx.compose.ui.unit.dp
 import com.example.dailyqwiz.ui.theme.DeepPurple
 import com.example.dailyqwiz.ui.theme.DirtyWhite
 import com.example.dailyqwiz.ui.theme.FullBlack
+import com.example.dailyqwiz.ui.theme.FullWhite
 
 @Composable
 fun AnswerOption(
+    modifier: Modifier = Modifier,
     answer: String,
     isSelected: Boolean = false,
     onClick: () -> Unit
 ) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
-            .padding(16.dp)
             .height(50.dp)
-            .background(DirtyWhite, RoundedCornerShape(16.dp))
-            .border(width = if (isSelected) 1.dp else 0.dp, color = DeepPurple)
             .clip(RoundedCornerShape(16.dp))
-            .clickable(onClick = onClick)
+            .background(color = if (isSelected) FullWhite else DirtyWhite, RoundedCornerShape(16.dp))
+            .border(width = if (isSelected) 1.dp else (-1).dp, color = DeepPurple, shape = RoundedCornerShape(16.dp))
+            .clickable(
+                onClick = onClick
+            )
     ) {
         Row (
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             Icon(
                 imageVector = if (isSelected) Icons.Filled.CheckCircle else Icons.Outlined.Circle,
@@ -52,6 +55,7 @@ fun AnswerOption(
                 tint = if (isSelected) DeepPurple else FullBlack,
             )
             Text(
+                modifier = Modifier.padding(start = 16.dp),
                 text = answer,
                 color = if (isSelected) DeepPurple else FullBlack,
             )
