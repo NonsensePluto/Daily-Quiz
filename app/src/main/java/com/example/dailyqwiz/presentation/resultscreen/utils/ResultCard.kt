@@ -2,11 +2,8 @@ package com.example.dailyqwiz.presentation.resultscreen.utils
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
@@ -18,10 +15,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.dailyqwiz.ui.theme.BlueBackground
-import com.example.dailyqwiz.ui.theme.FullBlack
-import com.example.dailyqwiz.ui.theme.FullWhite
-import com.example.dailyqwiz.ui.theme.StarYellow
+import com.example.dailyqwiz.presentation.generalutils.CardButton
+import com.example.dailyqwiz.presentation.generalutils.StarsRow
+import com.example.dailyqwiz.presentation.ui.theme.BlueBackground
+import com.example.dailyqwiz.presentation.ui.theme.FullBlack
+import com.example.dailyqwiz.presentation.ui.theme.FullWhite
+import com.example.dailyqwiz.presentation.ui.theme.StarYellow
+import com.example.dailyqwiz.domain.utils.ResultPhrasesGenerator
 
 @Composable
 fun ResultCard(
@@ -30,6 +30,9 @@ fun ResultCard(
     maxResult: Int,
     onNavigateToHomeScreen: () -> Unit
 ) {
+    val (mainPhrase, subPhrase) = ResultPhrasesGenerator.getResultPhrases(result, maxResult)
+
+
     Card(
         modifier = modifier
             .fillMaxWidth()
@@ -67,7 +70,7 @@ fun ResultCard(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 32.dp),
-                text = "Хорошая работа!",
+                text = mainPhrase,
                 color = FullBlack,
                 textAlign = TextAlign.Center,
                 fontWeight = FontWeight.Bold,
@@ -78,17 +81,17 @@ fun ResultCard(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 16.dp),
-                text = "Ваш результат: $result из $maxResult",
+                text = subPhrase,
                 color = FullBlack,
                 textAlign = TextAlign.Center,
                 fontSize = 18.sp
             )
 
-            ResultConfirmButton(
-                bodyColor = BlueBackground,
+            CardButton(
+                onClick = onNavigateToHomeScreen,
+                color = BlueBackground,
                 textColor = FullWhite,
-                onButtonClick = onNavigateToHomeScreen,
-                text = "Начать заново"
+                text = "Начать заново",
             )
 
         }

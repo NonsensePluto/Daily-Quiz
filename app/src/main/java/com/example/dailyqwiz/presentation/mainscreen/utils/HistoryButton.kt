@@ -18,8 +18,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.dailyqwiz.ui.theme.BlueBackground
-import com.example.dailyqwiz.ui.theme.FullWhite
+import com.example.dailyqwiz.presentation.ui.theme.BlueBackground
+import com.example.dailyqwiz.presentation.ui.theme.FullWhite
 
 @Composable
 fun HistoryButton(onClick: () -> Unit, modifier: Modifier = Modifier) {

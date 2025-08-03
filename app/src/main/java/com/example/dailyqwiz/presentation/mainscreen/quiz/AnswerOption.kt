@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Cancel
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.outlined.Circle
 import androidx.compose.material3.Icon
@@ -20,48 +21,70 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.dailyqwiz.ui.theme.DeepPurple
-import com.example.dailyqwiz.ui.theme.DirtyWhite
-import com.example.dailyqwiz.ui.theme.FullBlack
-import com.example.dailyqwiz.ui.theme.FullWhite
+import androidx.compose.ui.graphics.Color
+import com.example.dailyqwiz.domain.utils.TextDecoder
+import com.example.dailyqwiz.presentation.ui.theme.DeepPurple
+import com.example.dailyqwiz.presentation.ui.theme.DirtyWhite
+import com.example.dailyqwiz.presentation.ui.theme.FullBlack
+import com.example.dailyqwiz.presentation.ui.theme.LightGreen
+import com.example.dailyqwiz.presentation.ui.theme.Red
 
 @Composable
 fun AnswerOption(
     modifier: Modifier = Modifier,
     answer: String,
     isSelected: Boolean = false,
+    enabled: Boolean = true,
+    color: Color = Color.Unspecified,
     onClick: () -> Unit
 ) {
+    val color =
+        if (color != Color.Unspecified) color else if (isSelected) DeepPurple else DirtyWhite
+
+    val icon = when (color) {
+        Red -> Icons.Filled.Cancel
+        LightGreen -> Icons.Filled.CheckCircle
+        DeepPurple -> Icons.Filled.CheckCircle
+        else -> Icons.Outlined.Circle
+    }
+
     Box(
         modifier = modifier
             .fillMaxWidth()
             .height(50.dp)
             .clip(RoundedCornerShape(16.dp))
-            .background(color = if (isSelected) FullWhite else DirtyWhite, RoundedCornerShape(16.dp))
-            .border(width = if (isSelected) 1.dp else (-1).dp, color = DeepPurple, shape = RoundedCornerShape(16.dp))
+            .background(color = DirtyWhite, RoundedCornerShape(16.dp))
+            .border(
+                width = 1.dp,
+                color = color,
+                shape = RoundedCornerShape(16.dp)
+            )
             .clickable(
+                enabled = enabled,
                 onClick = onClick
             )
     ) {
-        Row (
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Icon(
-                imageVector = if (isSelected) Icons.Filled.CheckCircle else Icons.Outlined.Circle,
+                imageVector = icon,
                 contentDescription = "Answer status",
-                tint = if (isSelected) DeepPurple else FullBlack,
+                tint = if (color == DirtyWhite) FullBlack else color,
             )
             Text(
-                modifier = Modifier.padding(start = 16.dp),
-                text = answer,
+                modifier = Modifier
+                    .padding(start = 16.dp),
+                text = TextDecoder.decode(answer),
                 color = if (isSelected) DeepPurple else FullBlack,
             )
         }
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable

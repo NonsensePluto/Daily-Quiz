@@ -14,8 +14,11 @@ interface QuizDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertQuiz(quiz: QuizEntity): Long
 
-    @Query("SELECT * FROM quiz_table ORDER BY date DESC, time DESC")
+    @Query("SELECT * FROM quiz_table ORDER BY title Desc")
     fun getAllQuizzes(): Flow<List<QuizEntity>>
+
+    @Query("SELECT COUNT(*) FROM quiz_table")
+    fun getCountOfQuizzes(): Int
 
     @Query("SELECT * FROM quiz_table WHERE id = :id")
     suspend fun getQuizById(id: Int): QuizEntity?

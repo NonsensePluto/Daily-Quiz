@@ -1,23 +1,40 @@
 package com.example.dailyqwiz.domain.repository
 
 import com.example.dailyqwiz.data.database.dao.QuizDao
-import com.example.dailyqwiz.data.database.entity.QuizEntity
-import com.example.dailyqwiz.data.database.entity.UserAnswersEntity
 import com.example.dailyqwiz.domain.mapper.QuizDbToDomain
+import com.example.dailyqwiz.domain.mapper.QuizDomainToDb
+import com.example.dailyqwiz.domain.mapper.UserAnswersDomainToDb
 import com.example.dailyqwiz.domain.model.QuizHistory
+import com.example.dailyqwiz.domain.model.UserAnswer
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class QuizDbRepository @Inject constructor(
     private val quizDao: QuizDao,
-    private val quizDbToDomain: QuizDbToDomain
+    private val quizDbToDomain: QuizDbToDomain,
+    private val quizDomainToDb: QuizDomainToDb,
+    private val userAnswersDomainToDb: UserAnswersDomainToDb
 ) {
 
-    suspend fun saveQuiz(quiz: QuizEntity, answers: List<UserAnswersEntity>) {
-        val quizId = quizDao.insertQuiz(quiz).toInt()
-        answers.forEach { answer ->
-            quizDao.insertAnswer(answer.copy(idQuiz = quizId))
+    suspend fun saveQuiz(userAnswers: List<UserAnswer>, points: Int)  {
+        val quizNumber = quizDao.getCountOfQuizzes() + 1
+        val title = "Quiz $quizNumber"
+        val quizEntity = quizDomainToDb(title, points)
+        val quizId = quizDao.insertQuiz(quizEntity).toInt()
+
+        userAnswers.forEach { userAnswer ->
+            val entity = userAnswersDomainToDb(userAnswer, quizId)
+            quizDao.insertAnswer(entity)
+        }
+    }
+
+    fun getCountOfQuizzes(): Int = quizDao.getCountOfQuizzes()
+
+    suspend fun getQuizById(quizId: Int): QuizHistory? = quizDao.getQuizById(quizDao.getCountOfQuizzes()).let { quiz ->
+        quiz?.let {
+            val userAnswers = quizDao.getUserAnswersForQuiz(quiz.id)
+            quizDbToDomain(quiz, userAnswers)
         }
     }
 

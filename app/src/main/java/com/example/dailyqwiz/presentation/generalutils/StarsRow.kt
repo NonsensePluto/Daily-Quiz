@@ -1,4 +1,4 @@
-package com.example.dailyqwiz.presentation.resultscreen.utils
+package com.example.dailyqwiz.presentation.generalutils
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -9,19 +9,20 @@ import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.example.dailyqwiz.ui.theme.Grey
-import com.example.dailyqwiz.ui.theme.StarYellow
+import com.example.dailyqwiz.presentation.ui.theme.Grey
+import com.example.dailyqwiz.presentation.ui.theme.StarYellow
 
 @Composable
 fun StarsRow(
     modifier: Modifier = Modifier,
     result: Int,
-    maxResult: Int
+    maxResult: Int,
+    starSize: Dp = 50.dp
 ) {
     Row(
-        modifier = modifier
-            .fillMaxWidth(),
+        modifier = modifier,
         horizontalArrangement = Arrangement.Center
     ) {
         var yellowStarFlag = true
@@ -32,7 +33,7 @@ fun StarsRow(
 
             Icon(
                 modifier = Modifier
-                    .size(50.dp),
+                    .size(starSize),
                 imageVector = Icons.Filled.Star,
                 tint = if (yellowStarFlag) StarYellow else Grey,
                 contentDescription = "Счет пользователя",

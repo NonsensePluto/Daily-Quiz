@@ -1,6 +1,7 @@
 package com.example.dailyqwiz.presentation.viewmodel
 
 import com.example.dailyqwiz.domain.model.QuizQuestionModel
+import com.example.dailyqwiz.domain.model.UserAnswer
 
 data class MainState(
     val questions: List<QuizQuestionModel> = emptyList(),

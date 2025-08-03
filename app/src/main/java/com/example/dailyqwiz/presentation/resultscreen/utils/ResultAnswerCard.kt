@@ -20,12 +20,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.dailyqwiz.presentation.viewmodel.UserAnswer
-import com.example.dailyqwiz.ui.theme.FullBlack
-import com.example.dailyqwiz.ui.theme.FullWhite
-import com.example.dailyqwiz.ui.theme.Grey
-import com.example.dailyqwiz.ui.theme.LightGreen
-import com.example.dailyqwiz.ui.theme.Red
+import com.example.dailyqwiz.domain.model.UserAnswer
+import com.example.dailyqwiz.presentation.ui.theme.FullBlack
+import com.example.dailyqwiz.presentation.ui.theme.FullWhite
+import com.example.dailyqwiz.presentation.ui.theme.Grey
+import com.example.dailyqwiz.presentation.ui.theme.LightGreen
+import com.example.dailyqwiz.presentation.ui.theme.Red
 
 @Composable
 fun ResultAnswerCard(

@@ -1,6 +1,4 @@
-package com.example.dailyqwiz.presentation.viewmodel
-
-import com.example.dailyqwiz.domain.model.QuizQuestionModel
+package com.example.dailyqwiz.domain.model
 
 data class UserAnswer(
     val questionText: String,

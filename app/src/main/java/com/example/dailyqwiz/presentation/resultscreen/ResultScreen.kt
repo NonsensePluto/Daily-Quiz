@@ -18,18 +18,18 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.dailyqwiz.presentation.generalutils.CardButton
 import com.example.dailyqwiz.presentation.resultscreen.utils.ResultAnswerCard
 import com.example.dailyqwiz.presentation.viewmodel.MainViewModel
 import com.example.dailyqwiz.presentation.resultscreen.utils.ResultCard
-import com.example.dailyqwiz.presentation.resultscreen.utils.ResultConfirmButton
-import com.example.dailyqwiz.ui.theme.BlueBackground
-import com.example.dailyqwiz.ui.theme.DeepPurple
-import com.example.dailyqwiz.ui.theme.FullWhite
+import com.example.dailyqwiz.presentation.ui.theme.BlueBackground
+import com.example.dailyqwiz.presentation.ui.theme.DeepPurple
+import com.example.dailyqwiz.presentation.ui.theme.FullWhite
 
 @Composable
 fun ResultScreen(
     mainViewModel: MainViewModel = hiltViewModel(),
-    onNavigateToHomeScreen: () -> Unit
+    onNavigateToHomeScreen: () -> Unit,
 ) {
 
     val state by mainViewModel.uiState.collectAsStateWithLifecycle()
@@ -72,13 +72,13 @@ fun ResultScreen(
                 questionNumber++
             }
 
-            ResultConfirmButton(
+            CardButton(
                 modifier = Modifier
                     .padding(start = 32.dp, end = 32.dp, bottom = 32.dp),
-                bodyColor = FullWhite,
+                onClick = onNavigateToHomeScreen,
+                color = FullWhite,
                 textColor = DeepPurple,
-                onButtonClick = onNavigateToHomeScreen,
-                text = "Начать заново"
+                text = "Начать заново",
             )
 
         }

@@ -1,4 +1,4 @@
-package com.example.dailyqwiz.presentation.resultscreen.utils
+package com.example.dailyqwiz.presentation.generalutils
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -13,28 +13,31 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.dailyqwiz.presentation.ui.theme.DirtyWhite
 
 @Composable
-fun ResultConfirmButton(
+fun CardButton(
     modifier: Modifier = Modifier,
-    bodyColor: Color,
+    onClick: () -> Unit,
+    text: String,
+    color: Color,
     textColor: Color,
-    onButtonClick: () -> Unit,
-    text: String
+    enabled: Boolean = true
 ) {
-
     Button(
+        onClick = onClick,
         modifier = modifier
             .fillMaxWidth()
-            .padding(top = 50.dp)
+            .padding(top = 40.dp, start = 24.dp, end = 24.dp)
             .height(50.dp),
-        onClick = onButtonClick,
+        colors = ButtonDefaults.buttonColors(containerColor = color),
         shape = RoundedCornerShape(16.dp),
-        colors = ButtonDefaults.buttonColors(containerColor = bodyColor, contentColor = textColor)
+        enabled = enabled
     ) {
         Text(
             text = text,
             fontSize = 24.sp,
+            color = textColor,
             fontWeight = FontWeight.Bold
         )
     }

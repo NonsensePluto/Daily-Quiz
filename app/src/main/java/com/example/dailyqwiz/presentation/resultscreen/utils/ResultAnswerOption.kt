@@ -18,11 +18,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.dailyqwiz.ui.theme.FullBlack
-import com.example.dailyqwiz.ui.theme.DirtyWhite
-import com.example.dailyqwiz.ui.theme.FullWhite
-import com.example.dailyqwiz.ui.theme.LightGreen
-import com.example.dailyqwiz.ui.theme.Red
+import com.example.dailyqwiz.presentation.ui.theme.FullBlack
+import com.example.dailyqwiz.presentation.ui.theme.DirtyWhite
+import com.example.dailyqwiz.presentation.ui.theme.FullWhite
+import com.example.dailyqwiz.presentation.ui.theme.LightGreen
+import com.example.dailyqwiz.presentation.ui.theme.Red
 
 @Composable
 fun ResultAnswerOption(

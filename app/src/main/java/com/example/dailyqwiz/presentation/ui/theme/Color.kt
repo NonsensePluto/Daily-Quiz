@@ -1,4 +1,4 @@
-package com.example.dailyqwiz.ui.theme
+package com.example.dailyqwiz.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

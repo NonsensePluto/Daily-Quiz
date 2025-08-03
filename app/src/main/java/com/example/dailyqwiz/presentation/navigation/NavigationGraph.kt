@@ -9,6 +9,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
+import com.example.dailyqwiz.presentation.history.HistoryScreen
 import com.example.dailyqwiz.presentation.mainscreen.MainScreen
 import com.example.dailyqwiz.presentation.resultscreen.ResultScreen
 import com.example.dailyqwiz.presentation.viewmodel.MainViewModel
@@ -35,6 +36,9 @@ fun NavigationGraph(
                     mainViewModel = mainScreenViewModel,
                     onNavigateToResults = {
                         navController.navigate(Route.ResultScreen().route)
+                    },
+                    onNavigateToHistory = {
+                        navController.navigate(Route.HistoryScreen().route)
                     }
                 )
             }
@@ -51,6 +55,14 @@ fun NavigationGraph(
                         resultScreenViewModel.resetQuiz()
                         navController.popBackStack(Route.MainScreen().route, inclusive = false)
                     }
+                )
+            }
+
+            composable(route = Route.HistoryScreen().route) {
+                HistoryScreen(
+//                    onQuizClick =
+                    onNavigateToHomeScreen = { navController.popBackStack(Route.MainScreen().route, inclusive = false) }
+
                 )
             }
         }

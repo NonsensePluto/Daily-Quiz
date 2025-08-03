@@ -1,4 +1,4 @@
-package com.example.dailyqwiz.presentation.mainscreen.utils
+package com.example.dailyqwiz.presentation.generalutils
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
@@ -8,22 +8,27 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import com.example.dailyqwiz.R
-import com.example.dailyqwiz.ui.theme.FullWhite
+import com.example.dailyqwiz.presentation.ui.theme.FullWhite
 
 val GothamRounded = FontFamily(
     Font(R.font.gothamrndssm_bold, FontWeight.Bold)
 )
 
 @Composable
-fun TitleText(text: String, modifier: Modifier = Modifier) {
+fun TitleText(
+    modifier: Modifier = Modifier,
+    text: String,
+    fontSize: TextUnit = 64.sp,
+) {
     Text(
         modifier = modifier,
         text = text,
         color = FullWhite,
         fontWeight = FontWeight.Bold,
-        fontSize = 64.sp,
+        fontSize = fontSize,
         fontFamily = GothamRounded,
         letterSpacing = (-10).sp
     )
