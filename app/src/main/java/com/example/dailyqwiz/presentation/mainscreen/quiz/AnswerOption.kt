@@ -79,7 +79,7 @@ fun AnswerOption(
             )
             Text(
                 modifier = Modifier
-                    .padding(DefaultPadding),
+                    .padding(start = DefaultPadding),
                 text = TextDecoder.decode(answer),
                 color = if (isSelected) DeepPurple else FullBlack,
             )
