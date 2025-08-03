@@ -18,10 +18,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.dailyqwiz.presentation.ui.theme.DefaultPadding
 import com.example.dailyqwiz.presentation.ui.theme.FullBlack
 import com.example.dailyqwiz.presentation.ui.theme.DirtyWhite
 import com.example.dailyqwiz.presentation.ui.theme.FullWhite
 import com.example.dailyqwiz.presentation.ui.theme.LightGreen
+import com.example.dailyqwiz.presentation.ui.theme.MediumRadius
 import com.example.dailyqwiz.presentation.ui.theme.Red
 
 @Composable
@@ -37,14 +39,14 @@ fun ResultAnswerOption(
             .padding(vertical = 6.dp)
             .background(
                 color = if (isCorrect || isWrong) FullWhite else DirtyWhite,
-                shape = RoundedCornerShape(16.dp)
+                shape = RoundedCornerShape(MediumRadius)
             )
             .border(
                 width = if (isCorrect || isWrong) 1.dp else (-1).dp,
                 color = if(isCorrect) LightGreen else Red,
-                shape = RoundedCornerShape(16.dp)
+                shape = RoundedCornerShape(MediumRadius)
             )
-            .padding(16.dp)
+            .padding(DefaultPadding)
     ) {
         Icon(
             imageVector = when {

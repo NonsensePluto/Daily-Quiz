@@ -21,7 +21,9 @@ import androidx.compose.ui.unit.sp
 import com.example.dailyqwiz.domain.model.QuizHistory
 import com.example.dailyqwiz.domain.utils.DateAndTimeFormatter
 import com.example.dailyqwiz.presentation.generalutils.StarsRow
+import com.example.dailyqwiz.presentation.ui.theme.BigRadius
 import com.example.dailyqwiz.presentation.ui.theme.DeepPurple
+import com.example.dailyqwiz.presentation.ui.theme.DefaultPadding
 import com.example.dailyqwiz.presentation.ui.theme.FullWhite
 
 @Composable
@@ -39,13 +41,13 @@ fun HistoryQuizItem(
 
     Box(
         modifier = modifier
-            .clip(RoundedCornerShape(32.dp))
+            .clip(RoundedCornerShape(BigRadius))
             .combinedClickable(
                 onClick = onClick,
                 onLongClick = onLongPress
             )
             .background(if (isSelected) FullWhite else FullWhite.copy(alpha = 0.7f))
-            .padding(16.dp)
+            .padding(DefaultPadding)
             .fillMaxWidth()
 
 

@@ -20,23 +20,23 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.Text
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.dailyqwiz.presentation.generalutils.MessageCard
 import com.example.dailyqwiz.presentation.mainscreen.quiz.QuizCard
-import com.example.dailyqwiz.presentation.mainscreen.utils.ErrorCard
 import com.example.dailyqwiz.presentation.mainscreen.utils.HistoryButton
 import com.example.dailyqwiz.presentation.mainscreen.utils.QuizTopBar
+import com.example.dailyqwiz.presentation.ui.theme.BigScreenPadding
+import com.example.dailyqwiz.presentation.ui.theme.DefaultPadding
 import com.example.dailyqwiz.presentation.ui.theme.FullWhite
+import com.example.dailyqwiz.presentation.ui.theme.LargeScreenPadding
+import com.example.dailyqwiz.presentation.ui.theme.SmallText
 import com.example.dailyqwiz.presentation.viewmodel.MainViewModel
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -84,13 +84,13 @@ fun MainScreen (
                 HistoryButton(
                     onClick = onNavigateToHistory,
                     modifier = Modifier
-                        .padding(top = 100.dp)
+                        .padding(top = LargeScreenPadding)
                 )
             }
 
             QuizTopBar(
                 modifier = Modifier
-                    .padding(top = if(isQuizStarted) 50.dp else 100.dp),
+                    .padding(top = if(isQuizStarted) BigScreenPadding else LargeScreenPadding),
                 isQuizStarted = isQuizStarted,
                 onBackPressed = {
                     mainViewModel.resetQuiz()
@@ -102,7 +102,7 @@ fun MainScreen (
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(horizontal = 16.dp),
+                        .padding(horizontal = DefaultPadding),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     val currentQuestion = state.questions.first()
@@ -126,7 +126,7 @@ fun MainScreen (
                     )
                     Text(
                         text = "Вернуться к предыдущим вопросам нельзя",
-                        fontSize = 12.sp,
+                        fontSize = SmallText,
                         color = FullWhite
                     )
                 }

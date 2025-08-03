@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -34,14 +33,14 @@ fun QuizTopBar(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .height(64.dp) // высота строки top bar
+            .height(64.dp)
     ) {
         if (isQuizStarted) {
             IconButton(
                 onClick = onBackPressed,
                 modifier = Modifier
                     .align(Alignment.CenterStart)
-                    .padding(start = 0.dp) // прижимает максимально к левому краю
+                    .padding(start = 0.dp)
             ) {
                 Icon(
                     imageVector = Icons.Filled.ArrowBack,
@@ -55,7 +54,7 @@ fun QuizTopBar(
             text = "DAILY QUIZ",
             modifier = Modifier
                 .align(Alignment.Center),
-            fontSize = animatedFontSize.sp // Animated font size
+            fontSize = animatedFontSize.sp
         )
     }
 }

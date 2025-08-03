@@ -7,9 +7,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import androidx.lifecycle.viewModelScope
-import com.example.dailyqwiz.domain.model.QuizHistory
 import com.example.dailyqwiz.domain.usecases.database.DeleteQuizUseCase
-import com.example.dailyqwiz.domain.utils.DateAndTimeFormatter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch

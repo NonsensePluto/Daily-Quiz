@@ -1,7 +1,5 @@
 package com.example.dailyqwiz.domain.usecases.database
 
-import com.example.dailyqwiz.data.database.entity.QuizEntity
-import com.example.dailyqwiz.data.database.entity.UserAnswersEntity
 import com.example.dailyqwiz.domain.model.UserAnswer
 import com.example.dailyqwiz.domain.repository.QuizDbRepository
 import javax.inject.Inject

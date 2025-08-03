@@ -17,12 +17,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.dailyqwiz.presentation.ui.theme.BlueBackground
 import com.example.dailyqwiz.presentation.ui.theme.FullWhite
+import com.example.dailyqwiz.presentation.ui.theme.MediumText
+import com.example.dailyqwiz.presentation.ui.theme.SmallPadding
 
 @Composable
-fun HistoryButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
+fun HistoryButton(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     IconButton(
         modifier = modifier
             .clip(shape = RoundedCornerShape(32.dp))
@@ -33,16 +37,16 @@ fun HistoryButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(
                 modifier = Modifier
-                    .padding(8.dp)
+                    .padding(SmallPadding)
                     .wrapContentSize(Alignment.CenterStart),
                 text = "История",
                 color = BlueBackground,
                 fontWeight = FontWeight.Bold,
-                fontSize = 16.sp
+                fontSize = MediumText
             )
             Icon(
                 modifier = Modifier
-                    .padding(8.dp)
+                    .padding(SmallPadding)
                     .wrapContentSize(Alignment.CenterEnd),
                 imageVector = Icons.Filled.History,
                 tint = BlueBackground,

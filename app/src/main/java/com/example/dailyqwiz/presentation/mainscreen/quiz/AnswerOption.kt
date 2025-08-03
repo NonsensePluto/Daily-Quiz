@@ -24,9 +24,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.graphics.Color
 import com.example.dailyqwiz.domain.utils.TextDecoder
 import com.example.dailyqwiz.presentation.ui.theme.DeepPurple
+import com.example.dailyqwiz.presentation.ui.theme.DefaultPadding
 import com.example.dailyqwiz.presentation.ui.theme.DirtyWhite
 import com.example.dailyqwiz.presentation.ui.theme.FullBlack
 import com.example.dailyqwiz.presentation.ui.theme.LightGreen
+import com.example.dailyqwiz.presentation.ui.theme.MediumRadius
 import com.example.dailyqwiz.presentation.ui.theme.Red
 
 @Composable
@@ -52,12 +54,12 @@ fun AnswerOption(
         modifier = modifier
             .fillMaxWidth()
             .height(50.dp)
-            .clip(RoundedCornerShape(16.dp))
-            .background(color = DirtyWhite, RoundedCornerShape(16.dp))
+            .clip(RoundedCornerShape(MediumRadius))
+            .background(color = DirtyWhite, RoundedCornerShape(MediumRadius))
             .border(
                 width = 1.dp,
                 color = color,
-                shape = RoundedCornerShape(16.dp)
+                shape = RoundedCornerShape(MediumRadius)
             )
             .clickable(
                 enabled = enabled,
@@ -67,7 +69,7 @@ fun AnswerOption(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
+                .padding(DefaultPadding),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Icon(
@@ -77,7 +79,7 @@ fun AnswerOption(
             )
             Text(
                 modifier = Modifier
-                    .padding(start = 16.dp),
+                    .padding(DefaultPadding),
                 text = TextDecoder.decode(answer),
                 color = if (isSelected) DeepPurple else FullBlack,
             )

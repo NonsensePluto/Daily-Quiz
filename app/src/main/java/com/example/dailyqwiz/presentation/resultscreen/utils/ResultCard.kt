@@ -22,6 +22,9 @@ import com.example.dailyqwiz.presentation.ui.theme.FullBlack
 import com.example.dailyqwiz.presentation.ui.theme.FullWhite
 import com.example.dailyqwiz.presentation.ui.theme.StarYellow
 import com.example.dailyqwiz.domain.utils.ResultPhrasesGenerator
+import com.example.dailyqwiz.presentation.ui.theme.BigRadius
+import com.example.dailyqwiz.presentation.ui.theme.DefaultPadding
+import com.example.dailyqwiz.presentation.ui.theme.TitleText
 
 @Composable
 fun ResultCard(
@@ -36,20 +39,20 @@ fun ResultCard(
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .padding(16.dp),
-        shape = RoundedCornerShape(32.dp),
+            .padding(DefaultPadding),
+        shape = RoundedCornerShape(BigRadius),
         colors = CardDefaults.cardColors(containerColor = FullWhite),
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
+                .padding(DefaultPadding),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
             StarsRow(
                 modifier = Modifier
-                    .padding(16.dp)
+                    .padding(DefaultPadding)
                     .align(Alignment.CenterHorizontally),
                 result = result,
                 maxResult = maxResult
@@ -58,7 +61,7 @@ fun ResultCard(
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp),
+                    .padding(DefaultPadding),
                 text = "$result из $maxResult",
                 color = StarYellow,
                 textAlign = TextAlign.Center,
@@ -74,13 +77,13 @@ fun ResultCard(
                 color = FullBlack,
                 textAlign = TextAlign.Center,
                 fontWeight = FontWeight.Bold,
-                fontSize = 24.sp
+                fontSize = TitleText
             )
 
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 16.dp),
+                    .padding(top = DefaultPadding),
                 text = subPhrase,
                 color = FullBlack,
                 textAlign = TextAlign.Center,

@@ -1,6 +1,5 @@
 package com.example.dailyqwiz.domain.model
 
-
 data class QuizHistory(
     val id: Int = 0,
     val title: String,

@@ -22,8 +22,10 @@ import com.example.dailyqwiz.presentation.generalutils.CardButton
 import com.example.dailyqwiz.presentation.resultscreen.utils.ResultAnswerCard
 import com.example.dailyqwiz.presentation.viewmodel.MainViewModel
 import com.example.dailyqwiz.presentation.resultscreen.utils.ResultCard
+import com.example.dailyqwiz.presentation.ui.theme.BigScreenPadding
 import com.example.dailyqwiz.presentation.ui.theme.BlueBackground
 import com.example.dailyqwiz.presentation.ui.theme.DeepPurple
+import com.example.dailyqwiz.presentation.ui.theme.DefaultPadding
 import com.example.dailyqwiz.presentation.ui.theme.FullWhite
 
 @Composable
@@ -46,7 +48,7 @@ fun ResultScreen(
         ) {
             Text(
                 modifier = Modifier
-                    .padding(50.dp),
+                    .padding(BigScreenPadding),
                 color = FullWhite,
                 fontSize = 36.sp,
                 fontWeight = FontWeight.Bold,
@@ -55,7 +57,7 @@ fun ResultScreen(
 
             ResultCard(
                 modifier = Modifier
-                    .padding(bottom = 16.dp),
+                    .padding(bottom = DefaultPadding),
                 result = state.points,
                 maxResult = state.userAnswers.size,
                 onNavigateToHomeScreen = onNavigateToHomeScreen

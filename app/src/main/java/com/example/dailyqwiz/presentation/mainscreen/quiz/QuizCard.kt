@@ -2,7 +2,6 @@ package com.example.dailyqwiz.presentation.mainscreen.quiz
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -18,8 +17,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.dailyqwiz.domain.utils.TextDecoder
 import com.example.dailyqwiz.presentation.generalutils.CardButton
+import com.example.dailyqwiz.presentation.ui.theme.BigRadius
 import com.example.dailyqwiz.presentation.ui.theme.BlueBackground
 import com.example.dailyqwiz.presentation.ui.theme.DeepPurple
+import com.example.dailyqwiz.presentation.ui.theme.DefaultPadding
 import com.example.dailyqwiz.presentation.ui.theme.DirtyWhite
 import com.example.dailyqwiz.presentation.ui.theme.FullBlack
 import com.example.dailyqwiz.presentation.ui.theme.FullWhite
@@ -47,12 +48,12 @@ fun QuizCard(
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .padding(16.dp),
-        shape = RoundedCornerShape(32.dp),
+            .padding(DefaultPadding),
+        shape = RoundedCornerShape(BigRadius),
         colors = CardDefaults.cardColors(containerColor = FullWhite),
     ) {
         Column(
-            modifier = Modifier.padding(16.dp),
+            modifier = Modifier.padding(DefaultPadding),
         ) {
             Text(
                 modifier = Modifier.fillMaxWidth(),
@@ -75,7 +76,7 @@ fun QuizCard(
                 AnswerOption(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 16.dp),
+                        .padding(top = DefaultPadding),
                     answer = answer,
                     isSelected = selectedAnswer == answer,
                     enabled = !isAnswerLocked,
@@ -111,10 +112,10 @@ private fun getAnswerColor(
 ): Color {
     return when {
         !isAnswerLocked && selectedAnswer == answer -> DeepPurple
-        selectedAnswer == answer && isAnswerCorrect == true -> LightGreen // зеленый
-        selectedAnswer == answer && isAnswerCorrect == false -> Red // красный
-        isAnswerLocked && answer == correctAnswer -> LightGreen // правильный
-        else -> DirtyWhite // белый
+        selectedAnswer == answer && isAnswerCorrect == true -> LightGreen
+        selectedAnswer == answer && isAnswerCorrect == false -> Red
+        isAnswerLocked && answer == correctAnswer -> LightGreen
+        else -> DirtyWhite
     }
 }
 
@@ -132,8 +133,8 @@ fun QuizCardPreview() {
         onNextQuestion = { },
         isAnswerLocked = false,
         isAnswerCorrect = false,
-        correctAnswer = "TODO()",
-        onEndQuiz = { TODO() }
+        correctAnswer = "",
+        onEndQuiz = {  }
     )
 }
 

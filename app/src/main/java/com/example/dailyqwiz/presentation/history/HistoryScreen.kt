@@ -1,15 +1,11 @@
 package com.example.dailyqwiz.presentation.history
 
-import androidx.compose.animation.animateContentSize
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -29,12 +25,13 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.dailyqwiz.presentation.generalutils.MessageCard
-import com.example.dailyqwiz.presentation.generalutils.TitleText
 import com.example.dailyqwiz.presentation.history.utils.DeleteConfirmDialog
 import com.example.dailyqwiz.presentation.history.utils.DeleteMenu
 import com.example.dailyqwiz.presentation.history.utils.HistoryQuizItem
 import com.example.dailyqwiz.presentation.history.viewmodel.HistoryViewModel
+import com.example.dailyqwiz.presentation.ui.theme.BigScreenPadding
 import com.example.dailyqwiz.presentation.ui.theme.BlueBackground
+import com.example.dailyqwiz.presentation.ui.theme.DefaultPadding
 import com.example.dailyqwiz.presentation.ui.theme.FullWhite
 
 @Composable
@@ -67,7 +64,7 @@ fun HistoryScreen(
         ) {
             Text(
                 modifier = Modifier
-                    .padding(50.dp),
+                    .padding(BigScreenPadding),
                 color = FullWhite,
                 fontSize = 36.sp,
                 fontWeight = FontWeight.Bold,
@@ -79,12 +76,12 @@ fun HistoryScreen(
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(16.dp),
+                            .padding(DefaultPadding),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         MessageCard(
                             modifier = Modifier
-                                .padding(top = 16.dp),
+                                .padding(top = DefaultPadding),
                             onButtonClick = onNavigateToHomeScreen,
                             messageText = "Вы еще не проходили\n ни одной викторины",
                             buttonText = "начать викторину",
@@ -101,7 +98,7 @@ fun HistoryScreen(
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(16.dp),
+                            .padding(DefaultPadding),
                     ) {
                         state.historyList.forEach { historyItem ->
                             HistoryQuizItem(
@@ -112,9 +109,6 @@ fun HistoryScreen(
                                 onLongPress = { menuQuizId = historyItem.id }
                             )
                         }
-
-
-
                     }
 
                     // Затемнение и меню

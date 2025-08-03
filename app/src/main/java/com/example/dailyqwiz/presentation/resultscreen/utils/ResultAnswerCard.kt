@@ -21,10 +21,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.dailyqwiz.domain.model.UserAnswer
+import com.example.dailyqwiz.presentation.ui.theme.BigRadius
+import com.example.dailyqwiz.presentation.ui.theme.DefaultPadding
 import com.example.dailyqwiz.presentation.ui.theme.FullBlack
 import com.example.dailyqwiz.presentation.ui.theme.FullWhite
 import com.example.dailyqwiz.presentation.ui.theme.Grey
 import com.example.dailyqwiz.presentation.ui.theme.LightGreen
+import com.example.dailyqwiz.presentation.ui.theme.MediumText
 import com.example.dailyqwiz.presentation.ui.theme.Red
 
 @Composable
@@ -38,12 +41,12 @@ fun ResultAnswerCard(
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .padding(16.dp),
-        shape = RoundedCornerShape(32.dp),
+            .padding(DefaultPadding),
+        shape = RoundedCornerShape(BigRadius),
         colors = CardDefaults.cardColors(containerColor = FullWhite),
     ) {
         Column(
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.padding(DefaultPadding)
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -53,7 +56,7 @@ fun ResultAnswerCard(
                     text = "Вопрос $questionNumber из $totalQuestions",
                     color = Grey,
                     fontWeight = FontWeight.Bold,
-                    fontSize = 16.sp,
+                    fontSize = MediumText,
                     modifier = Modifier.weight(1f)
                 )
                 Icon(
@@ -68,7 +71,7 @@ fun ResultAnswerCard(
                 fontSize = 22.sp,
                 color = FullBlack,
                 modifier = Modifier
-                    .padding(top = 10.dp, bottom = 16.dp)
+                    .padding(top = 10.dp, bottom = DefaultPadding)
                     .fillMaxWidth(),
                 textAlign = TextAlign.Center
             )

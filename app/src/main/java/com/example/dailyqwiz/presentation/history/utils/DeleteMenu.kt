@@ -2,10 +2,8 @@ package com.example.dailyqwiz.presentation.history.utils
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -17,9 +15,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.dailyqwiz.presentation.ui.theme.FullBlack
 import com.example.dailyqwiz.presentation.ui.theme.FullWhite
+import com.example.dailyqwiz.presentation.ui.theme.MediumRadius
+import com.example.dailyqwiz.presentation.ui.theme.MediumText
 
 @Composable
 fun DeleteMenu(
@@ -28,7 +27,7 @@ fun DeleteMenu(
 ) {
     Box(
         modifier = Modifier
-            .clip(RoundedCornerShape(16.dp))
+            .clip(RoundedCornerShape(MediumRadius))
             .background(FullWhite)
             .padding(vertical = 8.dp, horizontal = 20.dp)
             .clickable(
@@ -47,7 +46,7 @@ fun DeleteMenu(
             Text(
                 text = "Удалить",
                 color = FullBlack,
-                fontSize = 16.sp
+                fontSize = MediumText
             )
         }
     }
