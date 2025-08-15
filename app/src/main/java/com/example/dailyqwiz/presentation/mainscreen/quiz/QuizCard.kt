@@ -16,6 +16,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.dailyqwiz.domain.utils.TextDecoder
+import com.example.dailyqwiz.presentation.generalutils.AnswerOption
 import com.example.dailyqwiz.presentation.generalutils.CardButton
 import com.example.dailyqwiz.presentation.ui.theme.BigRadius
 import com.example.dailyqwiz.presentation.ui.theme.BlueBackground
@@ -41,7 +42,9 @@ fun QuizCard(
     correctAnswer: String,
     onSelectAnswer: (String) -> Unit,
     onNextQuestion: () -> Unit,
-    onEndQuiz: () -> Unit
+    onEndQuiz: () -> Unit,
+    time: Long = 300000L,
+    onTimeLeft: () -> Unit,
 ) {
     val isLastQuestion = questionNumber == totalQuestions
 
@@ -55,6 +58,15 @@ fun QuizCard(
         Column(
             modifier = Modifier.padding(DefaultPadding),
         ) {
+            CountDownTimer(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 10.dp),
+                color = FullBlack,
+                onFinish = onTimeLeft,
+                time = time
+            )
+
             Text(
                 modifier = Modifier.fillMaxWidth(),
                 text = "Вопрос $questionNumber из $totalQuestions",
@@ -76,7 +88,7 @@ fun QuizCard(
                 AnswerOption(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = DefaultPadding),
+                        .padding(vertical = 5.dp),
                     answer = answer,
                     isSelected = selectedAnswer == answer,
                     enabled = !isAnswerLocked,
@@ -120,21 +132,22 @@ private fun getAnswerColor(
 }
 
 
-@Preview(showBackground = true)
-@Composable
-fun QuizCardPreview() {
-    QuizCard(
-        totalQuestions = 10,
-        questionNumber = 1,
-        question = "What is the capital of France?",
-        shuffledAnswers = listOf("Paris", "London", "Berlin", "Madrid"),
-        selectedAnswer = null,
-        onSelectAnswer = { },
-        onNextQuestion = { },
-        isAnswerLocked = false,
-        isAnswerCorrect = false,
-        correctAnswer = "",
-        onEndQuiz = {  }
-    )
-}
+//@Preview(showBackground = true)
+////@Composable
+////fun QuizCardPreview() {
+////    QuizCard(
+////        totalQuestions = 10,
+////        questionNumber = 1,
+////        question = "What is the capital of France?",
+////        shuffledAnswers = listOf("Paris", "London", "Berlin", "Madrid"),
+////        selectedAnswer = null,
+////        onSelectAnswer = { },
+////        onNextQuestion = { },
+////        isAnswerLocked = false,
+////        isAnswerCorrect = false,
+////        correctAnswer = "",
+////        onEndQuiz = {  },
+////        onTimeLeft = { }
+////    )
+////}
 

@@ -21,6 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.dailyqwiz.domain.model.UserAnswer
+import com.example.dailyqwiz.presentation.generalutils.AnswerOption
 import com.example.dailyqwiz.presentation.ui.theme.BigRadius
 import com.example.dailyqwiz.presentation.ui.theme.DefaultPadding
 import com.example.dailyqwiz.presentation.ui.theme.FullBlack
@@ -76,10 +77,14 @@ fun ResultAnswerCard(
                 textAlign = TextAlign.Center
             )
             userAnswer.allOptions.forEach { answer ->
-                ResultAnswerOption(
+                AnswerOption(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 5.dp),
                     answer = answer,
-                    isCorrect = answer == correctAnswer,
-                    isWrong = (answer == userAnswer.selected && userAnswer.selected != correctAnswer)
+                    isSelected = false,
+                    enabled = false,
+                    color = if(answer == correctAnswer) LightGreen else if(answer == userAnswer.selected) Red else Grey,
                 )
             }
         }

@@ -27,6 +27,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.dailyqwiz.presentation.generalutils.ConfirmDialog
 import com.example.dailyqwiz.presentation.generalutils.MessageCard
 import com.example.dailyqwiz.presentation.mainscreen.quiz.QuizCard
 import com.example.dailyqwiz.presentation.mainscreen.utils.HistoryButton
@@ -52,6 +53,7 @@ fun MainScreen (
     var selectedAnswer by remember { mutableStateOf<String?>(null) }
     var isAnswerLocked by remember { mutableStateOf(false) }
     var isAnswerCorrect by remember { mutableStateOf<Boolean?>(null) }
+    var showConfirmation by remember { mutableStateOf(false) }
     var isQuizStarted = state.questions.isNotEmpty()
     val coroutineScope = rememberCoroutineScope()
     val context = LocalContext.current
@@ -69,6 +71,19 @@ fun MainScreen (
                 selectedAnswer = null
             }
         }
+    }
+
+    if(showConfirmation) {
+        ConfirmDialog(
+            onClose = {
+                mainViewModel.resetQuiz()
+                isQuizStarted = false
+                showConfirmation = false
+            },
+            titleText = "Время вышло!",
+            subTitleText = "Вы не успели ответить на все вопросы.",
+            buttonText = "Начать заново"
+        )
     }
 
     Scaffold {
@@ -123,6 +138,7 @@ fun MainScreen (
                             onNavigateToResults()
                             mainViewModel.saveQuizResult()
                         },
+                        onTimeLeft = { showConfirmation = true }
                     )
                     Text(
                         text = "Вернуться к предыдущим вопросам нельзя",
@@ -173,11 +189,11 @@ fun MainScreen (
 }
 
 
-@Preview(showBackground = true)
-@Composable
-fun MainScreenPreview() {
-    MainScreen(
-        onNavigateToResults = {},
-        onNavigateToHistory = {}
-    )
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun MainScreenPreview() {
+//    MainScreen(
+//        onNavigateToResults = {},
+//        onNavigateToHistory = {}
+//    )
+//}

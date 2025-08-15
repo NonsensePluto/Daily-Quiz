@@ -69,7 +69,6 @@ fun ResultAnswerOption(
                 else -> FullBlack
             },
             modifier = Modifier.padding(start = 8.dp),
-            fontWeight = FontWeight.Bold,
             fontSize = 18.sp
         )
     }

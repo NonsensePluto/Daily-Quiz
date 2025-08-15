@@ -1,4 +1,4 @@
-package com.example.dailyqwiz.presentation.history.utils
+package com.example.dailyqwiz.presentation.generalutils
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
@@ -24,8 +24,11 @@ import com.example.dailyqwiz.presentation.ui.theme.MediumRadius
 import com.example.dailyqwiz.presentation.ui.theme.MediumText
 
 @Composable
-fun DeleteConfirmDialog(
-    onClose: () -> Unit
+fun ConfirmDialog(
+    onClose: () -> Unit,
+    titleText: String,
+    subTitleText: String,
+    buttonText: String,
 ) {
     Dialog(onDismissRequest = onClose) {
         Box(
@@ -41,14 +44,14 @@ fun DeleteConfirmDialog(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "Попытка удалена",
+                    text = titleText,
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.Black
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    text = "Вы можете пройти викторину снова, когда будете готовы.",
+                    text = subTitleText,
                     fontSize = MediumText,
                     color = Color.Gray,
                 )
@@ -61,7 +64,7 @@ fun DeleteConfirmDialog(
                     shape = RoundedCornerShape(MediumRadius)
                 ) {
                     Text(
-                        text = "ЗАКРЫТЬ",
+                        text = buttonText,
                         color = Color.White,
                         fontSize = MediumText,
                         fontWeight = FontWeight.Bold
@@ -74,6 +77,6 @@ fun DeleteConfirmDialog(
 
 @Preview(showBackground = true)
 @Composable
-fun DeleteConfirmDialogPreview() {
-    DeleteConfirmDialog(onClose = {})
+fun ConfirmDialogPreview() {
+    ConfirmDialog(onClose = {}, titleText = "Удалить викторину?", subTitleText = "Вы уверены, что хотите удалить эту викторину?", buttonText = "ЗАКРЫТЬ")
 }

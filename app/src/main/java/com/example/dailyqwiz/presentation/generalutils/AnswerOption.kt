@@ -1,4 +1,4 @@
-package com.example.dailyqwiz.presentation.mainscreen.quiz
+package com.example.dailyqwiz.presentation.generalutils
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -38,12 +38,12 @@ fun AnswerOption(
     isSelected: Boolean = false,
     enabled: Boolean = true,
     color: Color = Color.Unspecified,
-    onClick: () -> Unit
+    onClick: () -> Unit = { }
 ) {
-    val color =
+    val bgColor =
         if (color != Color.Unspecified) color else if (isSelected) DeepPurple else DirtyWhite
 
-    val icon = when (color) {
+    val icon = when (bgColor) {
         Red -> Icons.Filled.Cancel
         LightGreen -> Icons.Filled.CheckCircle
         DeepPurple -> Icons.Filled.CheckCircle
@@ -53,12 +53,11 @@ fun AnswerOption(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .height(50.dp)
             .clip(RoundedCornerShape(MediumRadius))
             .background(color = DirtyWhite, RoundedCornerShape(MediumRadius))
             .border(
                 width = 1.dp,
-                color = color,
+                color = bgColor,
                 shape = RoundedCornerShape(MediumRadius)
             )
             .clickable(
@@ -75,7 +74,7 @@ fun AnswerOption(
             Icon(
                 imageVector = icon,
                 contentDescription = "Answer status",
-                tint = if (color == DirtyWhite) FullBlack else color,
+                tint = if (bgColor == DirtyWhite) FullBlack else bgColor,
             )
             Text(
                 modifier = Modifier
