@@ -1,10 +1,10 @@
 package com.example.dailyqwiz.domain.usecases.remote
 
-import com.example.dailyqwiz.domain.repository.QuizRemoteRepository
+import com.example.dailyqwiz.domain.repository.QuizApiRepository
 import javax.inject.Inject
 
 class GetQuizQuestionsUseCase @Inject constructor(
-    private val repository: QuizRemoteRepository
+    private val repository: QuizApiRepository
 ) {
     suspend operator fun invoke(
         amount: Int = 5,

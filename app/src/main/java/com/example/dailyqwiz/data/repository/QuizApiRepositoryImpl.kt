@@ -1,20 +1,21 @@
-package com.example.dailyqwiz.domain.repository
+package com.example.dailyqwiz.data.repository
 
 import com.example.dailyqwiz.data.remote.QuizRemoteDataSource
 import com.example.dailyqwiz.domain.mapper.QuizQuestionResponseToDomain
 import com.example.dailyqwiz.domain.model.QuizQuestionModel
+import com.example.dailyqwiz.domain.repository.QuizApiRepository
 import javax.inject.Inject
 
-class QuizRemoteRepository @Inject constructor(
+class QuizApiRepositoryImpl @Inject constructor(
     private val quizRemoteDataSource: QuizRemoteDataSource,
     private val responseToModelMapper: QuizQuestionResponseToDomain
-    ) {
+) : QuizApiRepository {
 
-    suspend fun getQuizQuestions(
-        amount: Int = 5,
-        category: Int? = null,
-        difficulty: String? = null,
-        type: String? = null
+    override suspend fun getQuizQuestions(
+        amount: Int,
+        category: Int?,
+        difficulty: String?,
+        type: String?
     ): List<QuizQuestionModel> {
         return quizRemoteDataSource.getQuestions(amount, category, difficulty, type)
             .map { question ->
