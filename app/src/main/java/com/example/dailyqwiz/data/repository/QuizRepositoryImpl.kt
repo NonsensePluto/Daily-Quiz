@@ -1,9 +1,9 @@
 package com.example.dailyqwiz.data.repository
 
 import com.example.dailyqwiz.data.database.dao.QuizDao
-import com.example.dailyqwiz.domain.mapper.QuizDbToDomain
-import com.example.dailyqwiz.domain.mapper.QuizDomainToDb
-import com.example.dailyqwiz.domain.mapper.UserAnswersDomainToDb
+import com.example.dailyqwiz.data.mappers.QuizDbToDomain
+import com.example.dailyqwiz.data.mappers.QuizDomainToDb
+import com.example.dailyqwiz.data.mappers.UserAnswersDomainToDb
 import com.example.dailyqwiz.domain.model.QuizHistory
 import com.example.dailyqwiz.domain.model.UserAnswer
 import com.example.dailyqwiz.domain.repository.QuizRepository

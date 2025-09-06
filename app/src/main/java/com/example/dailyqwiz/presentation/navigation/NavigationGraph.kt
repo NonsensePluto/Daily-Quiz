@@ -9,10 +9,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
-import com.example.dailyqwiz.presentation.history.HistoryScreen
-import com.example.dailyqwiz.presentation.mainscreen.MainScreen
-import com.example.dailyqwiz.presentation.resultscreen.ResultScreen
-import com.example.dailyqwiz.presentation.viewmodel.MainViewModel
+import com.example.dailyqwiz.presentation.screens.historyscreen.HistoryScreen
+import com.example.dailyqwiz.presentation.screens.mainscreen.MainScreen
+import com.example.dailyqwiz.presentation.screens.resultscreen.ResultScreen
+import com.example.dailyqwiz.presentation.viewmodels.MainViewModel
 
 @Composable
 fun NavigationGraph(

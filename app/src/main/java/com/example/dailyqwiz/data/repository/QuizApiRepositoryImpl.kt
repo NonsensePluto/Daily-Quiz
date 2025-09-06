@@ -1,7 +1,7 @@
 package com.example.dailyqwiz.data.repository
 
 import com.example.dailyqwiz.data.remote.QuizRemoteDataSource
-import com.example.dailyqwiz.domain.mapper.QuizQuestionResponseToDomain
+import com.example.dailyqwiz.data.mappers.QuizQuestionResponseToDomain
 import com.example.dailyqwiz.domain.model.QuizQuestionModel
 import com.example.dailyqwiz.domain.repository.QuizApiRepository
 import javax.inject.Inject
